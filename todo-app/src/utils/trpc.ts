@@ -18,6 +18,17 @@ export const trpc = createTRPCNext<AppRouter>({
       links: [
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
+          headers() {
+            if (typeof window !== "undefined") {
+              const token = localStorage.getItem("token");
+              if (token) {
+                return {
+                  Authorization: `Bearer ${token}`,
+                };
+              }
+            }
+            return {};
+          },
         }),
       ],
     };

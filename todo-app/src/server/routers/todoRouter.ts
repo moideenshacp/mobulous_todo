@@ -1,15 +1,11 @@
-import { procedure, router } from "../trpc";
-import {
-  todoCreateSchema,
-  todoDeleteSchema,
-  todoUpdateSchema,
-} from "../schemas/todoSchema";
+import { protectedProcedure, router } from "../trpc";
+import { todoCreateSchema, todoUpdateSchema, todoDeleteSchema } from "../schemas/todoSchema";
 import { TRPCError } from "@trpc/server";
 
 export const todoRouter = router({
-  create: procedure.input(todoCreateSchema).mutation(async ({ input, ctx }) => {
+  create: protectedProcedure.input(todoCreateSchema).mutation(async ({ input, ctx }) => {
     try {
-      return await ctx.repositories.todo.create(input);
+      return await ctx.repositories.todo.create(input, ctx.userId);
     } catch (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
@@ -18,10 +14,10 @@ export const todoRouter = router({
       });
     }
   }),
-
-  list: procedure.query(async ({ ctx }) => {
+  
+  list: protectedProcedure.query(async ({ ctx }) => {
     try {
-      return await ctx.repositories.todo.findAll();
+      return await ctx.repositories.todo.findAll(ctx.userId);
     } catch (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
@@ -30,10 +26,10 @@ export const todoRouter = router({
       });
     }
   }),
-
-  update: procedure.input(todoUpdateSchema).mutation(async ({ input, ctx }) => {
+  
+  update: protectedProcedure.input(todoUpdateSchema).mutation(async ({ input, ctx }) => {
     try {
-      return await ctx.repositories.todo.update(input);
+      return await ctx.repositories.todo.update(input, ctx.userId);
     } catch (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",
@@ -42,10 +38,10 @@ export const todoRouter = router({
       });
     }
   }),
-
-  delete: procedure.input(todoDeleteSchema).mutation(async ({ input, ctx }) => {
+  
+  delete: protectedProcedure.input(todoDeleteSchema).mutation(async ({ input, ctx }) => {
     try {
-      return await ctx.repositories.todo.delete(input);
+      return await ctx.repositories.todo.delete(input, ctx.userId);
     } catch (error) {
       throw new TRPCError({
         code: "INTERNAL_SERVER_ERROR",

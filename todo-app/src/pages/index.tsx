@@ -1,8 +1,31 @@
+import { useAuth } from "@/context/AuthContext";
 import { Header } from "../components/layouts/Header";
 import { TodoForm } from "../components/todos/TodoForm";
 import { TodoList } from "../components/todos/TodoList";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
+    const { isAuthenticated, isLoading } = useAuth();
+    const router = useRouter();
+    
+    useEffect(() => {
+      if (!isAuthenticated && !isLoading) {
+        router.push("/signin");
+      }
+    }, [isAuthenticated, isLoading, router]);
+    
+    if (isLoading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
+        </div>
+      );
+    }
+    
+    if (!isAuthenticated) {
+      return null; // Will redirect due to useEffect
+    }
   return (
     <div className="min-h-screen bg-gray-50">
 
