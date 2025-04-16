@@ -42,6 +42,7 @@ This Todo app allows users to add, edit, delete, and filter tasks. It uses a mod
 Here’s the folder structure of the Todo App:
 
 ```
+├── README.md
 └── todo-app
     ├── .gitignore
     ├── README.md
@@ -51,55 +52,73 @@ Here’s the folder structure of the Todo App:
     ├── package.json
     ├── postcss.config.mjs
     ├── prisma
-    │   ├── migrations
-    │   │   ├── 20250415193425_init
-    │   │   │   └── migration.sql
-    │   │   └── migration_lock.toml
-    │   └── schema.prisma
+        ├── migrations
+        │   ├── 20250415193425_init
+        │   │   └── migration.sql
+        │   ├── 20250416043649_make_userid_optional
+        │   │   └── migration.sql
+        │   ├── 20250416043910_make_userid_required
+        │   │   └── migration.sql
+        │   └── migration_lock.toml
+        └── schema.prisma
     ├── public
-    │   ├── file.svg
-    │   ├── globe.svg
-    │   ├── next.svg
-    │   ├── vercel.svg
-    │   └── window.svg
+        ├── file.svg
+        ├── globe.svg
+        ├── next.svg
+        ├── vercel.svg
+        └── window.svg
     ├── src
-    │   ├── components
-    │   │   ├── layouts
-    │   │   │   └── Header.tsx
-    │   │   ├── todos
-    │   │   │   ├── FilterButton.tsx
-    │   │   │   ├── TodoForm.tsx
-    │   │   │   ├── TodoItem.tsx
-    │   │   │   └── TodoList.tsx
-    │   │   └── ui
-    │   │       ├── Button.tsx
-    │   │       └── Input.tsx
-    │   ├── pages
-    │   │   ├── _app.tsx
-    │   │   ├── api
-    │   │   │   └── trpc
-    │   │   │       └── [trpc].ts
-    │   │   └── index.tsx
-    │   ├── server
-    │   │   ├── context.ts
-    │   │   ├── repositories
-    │   │   │   └── todoRepository.ts
-    │   │   ├── routers
-    │   │   │   ├── index.ts
-    │   │   │   └── todoRouter.ts
-    │   │   ├── schemas
-    │   │   │   └── todoSchema.ts
-    │   │   └── trpc.ts
-    │   ├── styles
-    │   │   └── globals.css
-    │   ├── types
-    │   │   └── todo.ts
-    │   └── utils
-    │       ├── curentDate.ts
-    │       ├── formateDate.ts
-    │       └── trpc.ts
+        ├── components
+        │   ├── auth
+        │   │   └── AuthForm.tsx
+        │   ├── layouts
+        │   │   └── Header.tsx
+        │   ├── todos
+        │   │   ├── FilterButton.tsx
+        │   │   ├── TodoForm.tsx
+        │   │   ├── TodoItem.tsx
+        │   │   └── TodoList.tsx
+        │   └── ui
+        │   │   ├── Button.tsx
+        │   │   └── Input.tsx
+        ├── context
+        │   └── AuthContext.tsx
+        ├── pages
+        │   ├── _app.tsx
+        │   ├── api
+        │   │   └── trpc
+        │   │   │   └── [trpc].ts
+        │   ├── index.tsx
+        │   ├── signin.tsx
+        │   └── signup.tsx
+        ├── server
+        │   ├── context.ts
+        │   ├── repositories
+        │   │   ├── todoRepository.ts
+        │   │   └── userRepository.ts
+        │   ├── routers
+        │   │   ├── authRouter.ts
+        │   │   ├── index.ts
+        │   │   └── todoRouter.ts
+        │   ├── schemas
+        │   │   ├── authenticationSchema.ts
+        │   │   └── todoSchema.ts
+        │   ├── services
+        │   │   └── authService.ts
+        │   └── trpc.ts
+        ├── styles
+        │   └── globals.css
+        ├── types
+        │   ├── authContext.ts
+        │   ├── todo.ts
+        │   └── user.ts
+        └── utils
+        │   ├── curentDate.ts
+        │   ├── formateDate.ts
+        │   └── trpc.ts
     ├── tailwind.config.js
     └── tsconfig.json
+
 ```
 
 ## Setup and Installation
