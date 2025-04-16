@@ -102,7 +102,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
               />
             </svg>
             <p className="text-xs text-gray-400">
-              {formatDate(todo.createdAt)}
+            {formatDate(new Date(todo.createdAt))}
             </p>
           </div>
         </div>
