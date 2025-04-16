@@ -3,6 +3,8 @@ export interface TodoType {
     title: string;
     description: string | null;
     isCompleted: boolean;
-    createdAt:  Date; 
+    createdAt:  Date | string; 
+    updatedAt: string;
+    userId: string;
 }
   
